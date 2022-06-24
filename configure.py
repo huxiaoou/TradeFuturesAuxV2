@@ -92,7 +92,7 @@ strategy_config_table: Dict[str, CConfigTable] = {
     ),
 
     "RSW252HL063": CConfigTable(
-        t_bgn_date="20220621",
+        t_bgn_date="20220623",
         t_gid_list=["G_RS00", "G_RS01"],
         t_gid_delay={"G_RS00": 0, "G_RS01": 3},
         t_hold_period_n=5,

@@ -3,7 +3,7 @@ from configure import strategy_config_table
 
 print(SEP_LINE_EQ)
 
-factor_lbl = sys.argv[1]  # "RSW252HL063"
+factor_lbl = sys.argv[1].upper()  # ["RSW252HL063", "TS"]
 factor_config = strategy_config_table[factor_lbl]
 
 check_and_mkdir(signal_calendar_dir)

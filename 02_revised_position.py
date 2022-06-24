@@ -3,7 +3,7 @@ from configure import strategy_config_table
 
 # arguments
 sig_date = sys.argv[1]
-factor_lbl = sys.argv[2]  # "RSW252HL063"
+factor_lbl = sys.argv[2].upper()  # ["RSW252HL063", "TS"]
 factor_config = strategy_config_table[factor_lbl]
 
 # --- load raw calendar
@@ -30,6 +30,10 @@ for gid in factor_config.m_gid_list:
         revised_df["close"] = revised_df["contract"].map(lambda z: get_contract_price(z, sig_date, futures_instrument_mkt_data_dir, "close"))
         revised_df["quantity"] = revised_df["available_amt"] / revised_df["close"] / revised_df["contract_multiplier"]
         revised_df["trade_quantity"] = revised_df["quantity"].map(lambda z: int(np.round(z)))
+        revised_df = revised_df[[
+            "instrument", factor_lbl,
+            "contract_multiplier", "weight", "available_amt", "close", "quantity",
+            "contract", "direction", "trade_quantity"]]
 
         revised_path = raw_signals_path.replace(".csv", ".2.csv")
         revised_df.to_csv(revised_path, index=False, float_format="%.2f")

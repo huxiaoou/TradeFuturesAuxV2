@@ -3,7 +3,7 @@ from configure import universe_options, strategy_config_table
 
 # arguments
 sig_date = sys.argv[1]
-factor_lbl = sys.argv[2]  # "RSW252HL063"
+factor_lbl = sys.argv[2].upper()  # ["RSW252HL063", "TS"]
 factor_config = strategy_config_table[factor_lbl]
 
 # --- load raw calendar

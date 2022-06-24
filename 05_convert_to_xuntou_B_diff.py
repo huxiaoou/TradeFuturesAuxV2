@@ -7,7 +7,7 @@ created @ 2022-06-23
 """
 
 sig_date = sys.argv[1]
-factor_lbl = sys.argv[2]  # "RSW252HL063"
+factor_lbl = sys.argv[2].upper()  # ["RSW252HL063", "TS"]
 n_batch = int(sys.argv[3])
 factor_config = strategy_config_table[factor_lbl]
 

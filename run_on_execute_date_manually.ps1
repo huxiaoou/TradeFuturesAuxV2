@@ -1,4 +1,4 @@
-Write-Host "Begin to run operation for TS factors"
+Write-Host "Begin to run operation for factors"
 $trade_date = Read-Host -Prompt "Please Input the trade_date [format = YYYYMMDD], which should be a signal date"
 $factor = Read-Host -Prompt "Please Input the factor, available options = [RSW252HL063, TS]"
 python 02_revised_position.py $trade_date $factor >> .\log\$trade_date.manual.log
