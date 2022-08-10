@@ -56,7 +56,9 @@ for gid in factor_config.m_gid_list:
         # ---
         raw_signals_file = "raw_signals.{}.sig_{}.exe_{}.{}.csv".format(factor_lbl, sig_date, exe_date, gid)
         raw_signals_path = os.path.join(signals_dir, sig_date[0:4], sig_date, raw_signals_file)
+        raw_signals_path_revised = os.path.join(signals_dir, sig_date[0:4], sig_date, raw_signals_file.replace(".csv", ".revised.csv"))
         raw_signals_df.to_csv(raw_signals_path, index=False, float_format="%.2f")
+        raw_signals_df.to_csv(raw_signals_path_revised, index=False, float_format="%.2f")
 
         print(SEP_LINE_DS)
         print("| {} | factor {}-{} at {} is updated |".format(dt.datetime.now(), factor_lbl, gid, sig_date))
