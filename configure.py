@@ -60,7 +60,7 @@ WANYUAN = 1e4
 
 
 class CConfigTable(object):
-    def __init__(self, t_bgn_date: str, t_gid_list: list, t_gid_delay: dict, t_hold_period_n: int, t_single_hold_prop: float, t_uid: str, t_available_amt: float):
+    def __init__(self, t_bgn_date: str, t_gid_list: list, t_gid_delay: dict, t_hold_period_n: int, t_single_hold_prop: float, t_uid: str, t_available_amt_dict: Dict[str, float]):
         """
 
         :param t_bgn_date: signal begin date,  format = "YYYYMMDD"
@@ -69,7 +69,7 @@ class CConfigTable(object):
         :param t_hold_period_n:
         :param t_single_hold_prop:
         :param t_uid: universe id
-        :param t_available_amt: total amount money for each gid
+        :param t_available_amt_dict: total amount money for each gid. Make sure its KEYS are sorted as DESCENDING
         """
         self.m_bgn_date = t_bgn_date
         self.m_gid_list = t_gid_list
@@ -77,7 +77,13 @@ class CConfigTable(object):
         self.m_hold_period_n = t_hold_period_n
         self.m_single_hold_prop = t_single_hold_prop
         self.m_uid = t_uid
-        self.m_available_amt = t_available_amt
+        self.m_available_amt_dict = t_available_amt_dict
+
+    def get_available_amt_dict(self, t_sig_date: str):
+        for key_date, val_amt in self.m_available_amt_dict.items():
+            if t_sig_date >= key_date:
+                return val_amt
+        return 0
 
 
 strategy_config_table: Dict[str, CConfigTable] = {
@@ -88,7 +94,10 @@ strategy_config_table: Dict[str, CConfigTable] = {
         t_hold_period_n=20,
         t_single_hold_prop=0.4,
         t_uid="U21",
-        t_available_amt=1800 * WANYUAN,
+        t_available_amt_dict={
+            "20230103": 3600 * WANYUAN,
+            "20220512": 1800 * WANYUAN,
+        }  # Make sure its KEYS are sorted as DESCENDING
     ),
 
     "RSW252HL063": CConfigTable(
@@ -98,6 +107,8 @@ strategy_config_table: Dict[str, CConfigTable] = {
         t_hold_period_n=5,
         t_single_hold_prop=0.2,
         t_uid="U29",
-        t_available_amt=800 * WANYUAN,
+        t_available_amt_dict={
+            "20220623": 800 * WANYUAN,
+        },  # Make sure its KEYS are sorted as DESCENDING
     ),
 }

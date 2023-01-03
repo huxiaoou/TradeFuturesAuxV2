@@ -26,7 +26,7 @@ for gid in factor_config.m_gid_list:
         revised_df = pd.read_csv(raw_signals_path)
         revised_df["contract_multiplier"] = revised_df["instrument"].map(lambda z: instrument_info_table.get_multiplier(z))
         revised_df["weight"] = 1
-        revised_df["available_amt"] = factor_config.m_available_amt / revised_df["weight"].sum()
+        revised_df["available_amt"] = factor_config.get_available_amt_dict(t_sig_date=sig_date) / revised_df["weight"].sum()
         revised_df["close"] = revised_df["contract"].map(lambda z: get_contract_price(z, sig_date, futures_instrument_mkt_data_dir, "close"))
         revised_df["quantity"] = revised_df["available_amt"] / revised_df["close"] / revised_df["contract_multiplier"]
         revised_df["trade_quantity"] = revised_df["quantity"].map(lambda z: int(np.round(z)))
