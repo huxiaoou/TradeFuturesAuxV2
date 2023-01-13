@@ -31,3 +31,8 @@ OPERATION_XUNTOU_U_DISK_DIR = os.path.join("H:", "Trade", "xuntou_group")
 
 SEP_LINE_EQ = "=" * 120
 SEP_LINE_DS = "-" * 120
+
+if __name__ == "__main__":
+    check_and_mkdir(signal_calendar_dir)
+    check_and_mkdir(signals_dir)
+    check_and_mkdir(OPERATION_XUNTOU_U_DISK_DIR)
