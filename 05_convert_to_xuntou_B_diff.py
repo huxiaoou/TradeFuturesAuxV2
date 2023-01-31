@@ -24,7 +24,11 @@ for gid in factor_config.m_gid_list:
     if signal_calendar_df.at[sig_date, gid] > 0:
         diff_file = "diff.{}.sig_{}.exe_{}.{}.csv".format(factor_lbl, sig_date, exe_date, gid)
         diff_path = os.path.join(signals_dir, sig_date[0:4], sig_date, diff_file)
-        df = pd.read_csv(diff_path)
+        try:
+            df = pd.read_csv(diff_path)
+        except FileNotFoundError:
+            print("... diff path = '{}' does NOT exist.\n... batch files are not created.".format(diff_path))
+            sys.exit()
         df = df.sort_values(by=["operation", "contract"], ascending=True)
 
         for op, op_df in df.groupby(by="operation"):

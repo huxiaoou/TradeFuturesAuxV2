@@ -25,7 +25,11 @@ for gid in factor_config.m_gid_list:
 
         prev_file = "raw_signals.{}.sig_{}.exe_{}.{}.revised.2.csv".format(factor_lbl, prev_sig_date, prev_exe_date, gid)
         prev_path = os.path.join(signals_dir, prev_sig_date[0:4], prev_sig_date, prev_file)
-        prev_df = pd.read_csv(prev_path, dtype={"direction": int, "trade_quantity": int}).set_index("instrument")
+        try:
+            prev_df = pd.read_csv(prev_path, dtype={"direction": int, "trade_quantity": int}).set_index("instrument")
+        except FileNotFoundError:
+            print("... prev path = '{}' does NOT exist.\n... diff files are not created.".format(prev_path))
+            sys.exit()
         prev_df = prev_df[["contract", "direction", "trade_quantity"]]
 
         # --- save merged

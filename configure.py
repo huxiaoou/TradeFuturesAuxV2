@@ -101,14 +101,15 @@ strategy_config_table: Dict[str, CConfigTable] = {
     ),
 
     "RSW252HL063": CConfigTable(
-        t_bgn_date="20220623",
-        t_gid_list=["G_RS00", "G_RS01"],
-        t_gid_delay={"G_RS00": 0, "G_RS01": 3},
+        t_bgn_date="20230131",
+        t_gid_list=["G_RS00"],
+        t_gid_delay={"G_RS00": 0},
         t_hold_period_n=5,
         t_single_hold_prop=0.2,
         t_uid="U29",
         t_available_amt_dict={
             "20220623": 800 * WANYUAN,
+            "20230130": 6000 * WANYUAN,
         },  # Make sure its KEYS are sorted as DESCENDING
     ),
 }
