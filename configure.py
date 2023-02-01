@@ -95,9 +95,10 @@ strategy_config_table: Dict[str, CConfigTable] = {
         t_single_hold_prop=0.4,
         t_uid="U21",
         t_available_amt_dict={
+            # Make sure its KEYS are sorted as DESCENDING
             "20230103": 3600 * WANYUAN,
             "20220512": 1800 * WANYUAN,
-        }  # Make sure its KEYS are sorted as DESCENDING
+        }
     ),
 
     "RSW252HL063": CConfigTable(
@@ -108,8 +109,9 @@ strategy_config_table: Dict[str, CConfigTable] = {
         t_single_hold_prop=0.2,
         t_uid="U29",
         t_available_amt_dict={
-            "20220623": 800 * WANYUAN,
+            # Make sure its KEYS are sorted as DESCENDING
             "20230130": 6000 * WANYUAN,
-        },  # Make sure its KEYS are sorted as DESCENDING
+            "20220623": 800 * WANYUAN,
+        },
     ),
 }
